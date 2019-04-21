@@ -42,8 +42,6 @@ public class hansu_1065 {
 			}
 			
 			if(isHansu) {
-				System.out.println(s);
-				System.out.println(i);
 				count++;
 			}
 		}
