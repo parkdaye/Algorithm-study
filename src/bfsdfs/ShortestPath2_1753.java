@@ -93,6 +93,8 @@ public class ShortestPath2_1753 {
 }
 
 class Vertex implements Comparable<Vertex> {
+	// w는 그래프에선 가중치로, priority queue에선 현재 가장작은 거리로 써서 헷갈림ㅠㅠ
+	// 다음엔 그냥 클래스를 따로 두는 것도 좋을 것 같다...
 	private int v; //현재 정점
 	private int w; //현재 길이
 	
