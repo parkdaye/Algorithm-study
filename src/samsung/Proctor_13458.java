@@ -24,12 +24,12 @@ public class Proctor_13458 {
 		
 		long sum = 0;
 		for(int i = 1; i <= N; i++) {
-			int students = A[i];
 			//총감독관
 			sum++;
-			long remains = students - B;
 			//남은 수에 부감독관 수를 더해줌
-			sum += Math.ceil((long)remains/C);
+			int remains = A[i] - B;
+			if(remains > 0)
+				sum += Math.ceil(1.0 * remains/C);
 		}
 		
 		System.out.println(sum);
