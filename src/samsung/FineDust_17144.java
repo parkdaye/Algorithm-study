@@ -14,6 +14,8 @@ public class FineDust_17144 {
 	static int[][] map;
 	static int[] ax = { -1, 1, 0, 0 };
 	static int[] ay = { 0, 0, -1, 1 };
+	static int[] cw = { 3, 1, 2, 0 };
+	static int[] ccw = { 3, 0, 2, 1 };
 	static List<Points> airCleaner;
 
 	public static void main(String[] args) throws IOException {
@@ -66,21 +68,22 @@ public class FineDust_17144 {
 				}
 			}
 
-			// 공기청정기 작동
-			operateAirCleaner(tempMap, airCleaner);
-
+			// map 바꾸기
 			for (int i = 1; i <= R; i++) {
 				for (int j = 1; j <= C; j++) {
 					map[i][j] = tempMap[i][j];
 				}
 			}
+
+			// 공기청정기 작동
+			operateAirCleaner(tempMap, airCleaner);
+
 		}
-		
-		
+
 		int count = 0;
 		for (int i = 1; i <= R; i++) {
 			for (int j = 1; j <= C; j++) {
-				if(map[i][j] > 0) {
+				if (map[i][j] > 0) {
 					count += map[i][j];
 				}
 			}
@@ -93,43 +96,62 @@ public class FineDust_17144 {
 		Points up = airCleaner.get(0);
 		Points down = airCleaner.get(1);
 		int ux = up.getX();
+		int uy = up.getY();
 		int dx = down.getX();
+		int dy = down.getY();
+		map[ux][uy] = -1;
+		map[dx][dy] = -1;
 
-		// 아래/위쪽으로
-		for (int i = ux - 1; i > 0; i--) {
-			if (i + 1 == ux)
+		// 위의 공기청정기가 작동하도록
+		int k = 0;
+		ux += ax[ccw[k]];
+		uy += ay[ccw[k]];
+		map[ux][uy] = 0;
+
+		while (true) { // 원래 위치로 돌아갈때까지
+			int unx = ux + ax[ccw[k]];
+			int uny = uy + ay[ccw[k]];
+			
+
+			if (unx > 0 && unx <= R && uny > 0 && uny <= C) {
+				if(map[unx][uny] == -1)
+					break;
+				
+				map[unx][uny] = tempMap[ux][uy];
+				ux = unx;
+				uy = uny;
+			} else {
+				k++;
 				continue;
+			}
 
-			tempMap[i + 1][1] = tempMap[i][1];
 		}
 
-		for (int i = dx + 1; i <= R; i++) {
-			if (i - 1 == dx)
+		// 아래의 공기청정기가 작동하도록
+		k = 0;
+		dx += ax[cw[k]];
+		dy += ay[cw[k]];
+		map[dx][dy] = 0;
+		
+		while (true) { // 원래 위치로 돌아갈때까지
+			int dnx = dx + ax[cw[k]];
+			int dny = dy + ay[cw[k]];
+			
+
+			if (dnx > 0 && dnx <= R && dny > 0 && dny <= C) {
+				if(map[dnx][dny] == -1)
+					break;
+				
+				map[dnx][dny] = tempMap[dx][dy];
+				dx = dnx;
+				dy = dny;
+			} else {
+				k++;
 				continue;
+			}
 
-			tempMap[i - 1][1] = tempMap[i][1];
 		}
 
-		// 왼쪽으로
-		for (int i = 2; i <= C; i++) {
-			tempMap[1][i - 1] = tempMap[1][i];
-			tempMap[R][i - 1] = tempMap[R][i];
-		}
-
-		// 위로/아래쪽으로
-		for (int i = 2; i <= ux; i++) {
-			tempMap[i - 1][C] = tempMap[i][C];
-		}
-
-		for (int i = R - 1; i >= dx; i--) {
-			tempMap[i + 1][C] = tempMap[i][C];
-		}
-
-		// 오른쪽으로
-		for (int i = C - 1; i >= 1; i--) {
-			tempMap[ux][i + 1] = tempMap[ux][i];
-			tempMap[dx][i + 1] = tempMap[dx][i];
-		}		
 	}
 
 	private static void spread(int x, int y, List<Integer> directions, int[][] tempMap) {
