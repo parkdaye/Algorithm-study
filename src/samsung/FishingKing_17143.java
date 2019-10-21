@@ -11,7 +11,6 @@ public class FishingKing_17143 {
 	static int M;
 	static Shark[][] sharkMap;
 	static boolean[][] isSharkExist;
-	// static List<Shark> sharks;
 	static int[] ax = { 0, -1, 1, 0, 0 };
 	static int[] ay = { 0, 0, 0, 1, -1 };
 
@@ -25,7 +24,6 @@ public class FishingKing_17143 {
 
 		sharkMap = new Shark[R + 1][C + 1];
 		isSharkExist = new boolean[R + 1][C + 1];
-		// sharks = new ArrayList<Shark>();
 
 		for (int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -36,7 +34,6 @@ public class FishingKing_17143 {
 			int z = Integer.parseInt(st.nextToken());
 			sharkMap[r][c] = new Shark(s, d, z);
 			isSharkExist[r][c] = true;
-			// sharks.add(new Shark(r, c, s, d, z));
 		}
 
 		int catchCount = 0;

@@ -32,8 +32,6 @@ public class ShortestPath2_1753 {
 			graph[i] = new ArrayList<Vertex>();
 		}
 
-		//Arrays.fill(min, MAX_VALUE);
-
 		for (int i = 0; i < E; i++) {
 			st = new StringTokenizer(br.readLine());
 

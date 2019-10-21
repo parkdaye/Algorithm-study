@@ -83,24 +83,24 @@ public class ConnectProcessor_1767 {
 	public static void checkAround(int now, int x, int y) {
 		for (int i = 0; i <= 3; i++) { // 4면 검사
 				
-			int nextX = x + ax[i];
-			int nextY = y + ay[i];
+			int nX = x + ax[i];
+			int nY = y + ay[i];
 
 			boolean isConnectable = true;
 			int tempCount = 0;
 
-			while (nextX > 0 && nextX <= N && nextY > 0 && nextY <= N) {
-				if (map[nextX][nextY] != 1 && map[nextX][nextY] != 2) {
-					map[nextX][nextY] = 2;
-					nextX += ax[i];
-					nextY += ay[i];
+			while (nX > 0 && nX <= N && nY > 0 && nY <= N) {
+				if (map[nX][nY] != 1 && map[nX][nY] != 2) {
+					map[nX][nY] = 2;
+					nX += ax[i];
+					nY += ay[i];
 					tempCount++;
 				} else {
 					isConnectable = false;
 
 					// 연결할 수 없으면 돌려놓기
-					int preX = nextX - ax[i];
-					int preY = nextY - ay[i];
+					int preX = nX - ax[i];
+					int preY = nY - ay[i];
 					while (preX != x || preY != y) {
 						map[preX][preY] = 0;
 						preX -= ax[i];
@@ -120,8 +120,8 @@ public class ConnectProcessor_1767 {
 			// 그냥 coreCount를 dfs함수 인자로 넘겨서 풀었으면 깔끔할 것을,,, idiot~~
 			
 			if (isConnectable) {
-				int preX = nextX - ax[i];
-				int preY = nextY - ay[i];
+				int preX = nX - ax[i];
+				int preY = nY - ay[i];
 				while (preX != x || preY != y) {
 					map[preX][preY] = 0;
 					preX -= ax[i];

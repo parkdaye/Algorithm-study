@@ -37,6 +37,7 @@ public class TreasureBoxPassword_5658 {
 						sum += dec;
 						
 					}
+					
 					if(!passwordSet.contains(sum))
 						passwordSet.add(sum);					
 					

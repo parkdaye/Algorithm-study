@@ -145,7 +145,7 @@ public class MarbleExit_13460 {
 				}
 
 				// 방문하지 않은 경우에만 카운트
-				if (checked[rx][ry][bx][by] == true) {
+				if (checked[rx][ry][bx][by]) {
 					continue;
 				} else {
 					checked[rx][ry][bx][by] = true;

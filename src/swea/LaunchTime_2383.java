@@ -109,7 +109,6 @@ public class LaunchTime_2383 {
 		int[] checked = new int[3];
 		int time = 1;
 
-		// A 계산
 		while (true) {
 
 			for (int i = 0; i < copy.size(); i++) {
