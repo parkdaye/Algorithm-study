@@ -3,15 +3,16 @@ package sort;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class MergeSort_2751 {
+	static int result[];
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int N = Integer.parseInt(br.readLine());
 		int[] num = new int[N + 1];
+		result = new int[N + 1];
 
 		for (int i = 1; i <= N; i++) {
 			num[i] = Integer.parseInt(br.readLine());
@@ -37,21 +38,20 @@ public class MergeSort_2751 {
 		int j = M + 1;
 		int k = L;
 		
-		int temp[] = new int[num.length];
 		while(i <= M && j <= R) {
 			if(num[i] < num[j])
-				temp[k++] = num[i++];
+				result[k++] = num[i++];
 			else
-				temp[k++] = num[j++];
+				result[k++] = num[j++];
 		}
 		
 		while(i <= M)
-			temp[k++] = num[i++];
+			result[k++] = num[i++];
 		while(j <= R)
-			temp[k++] = num[j++];
+			result[k++] = num[j++];
 		
 		for(int t = L; t <= R; t++)
-			num[t] = temp[t];
+			num[t] = result[t];
 		
 	}
 
