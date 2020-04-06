@@ -2,6 +2,12 @@ package programmers.level3;
 
 import java.util.Stack;
 
+/**
+ * 
+ * @author dayepark
+ * '([)]' '({})' 와 같이 괄호가 제대로 닫혀있는지를 판단하는 문제
+ */
+
 public class Line1 {
 
 	public static void main(String[] args) {

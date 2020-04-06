@@ -1,5 +1,11 @@
 package programmers.level3;
 
+/**
+ * 
+ * @author dayepark
+ * 부정행위 지수 = 총 의심문항 + (가장긴 의심문항 수) ^ 2 최대 부정행위 지수는?
+ */
+
 public class Line2 {
 
 	public static void main(String[] args) {
