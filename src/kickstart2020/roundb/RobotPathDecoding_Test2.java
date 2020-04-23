@@ -31,7 +31,7 @@ public class RobotPathDecoding_Test2 {
 				}
 			}
 
-			Exp p = expanded(bracket, prog, 0, prog.length());
+			Pair p = expanded(bracket, prog, 0, prog.length());
 			p.setX((p.getX() + 1) % max);
 			p.setY((p.getY() + 1) % max);
 			
@@ -47,15 +47,13 @@ public class RobotPathDecoding_Test2 {
 		}
 	}
 
-	public static Exp expanded(Map<Integer, Integer> b, String s, int l, int r) {
-		StringBuffer sb = new StringBuffer();
-		Exp exp = new Exp(0, 0, sb.toString());
+	public static Pair expanded(Map<Integer, Integer> b, String s, int l, int r) {
+		Pair exp = new Pair(0, 0);
 
 		for (int i = l; i < r; i++) {
 			char c = s.charAt(i);
 
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W') {
-				sb.append(c);
 
 				switch (c) {
 				case 'N':
@@ -72,11 +70,9 @@ public class RobotPathDecoding_Test2 {
 					break;
 				}
 			} else if (Character.isDigit(c)) {
-				Exp tmp = expanded(b, s, i + 2, b.get(i + 1));
+				Pair tmp = expanded(b, s, i + 2, b.get(i + 1));
 
 				int d = c - '0';
-				for (int j = 0; j < d; j++)
-					sb.append(tmp.getResult());
 				
 				exp.setX(exp.getX() + d * tmp.getX());
 				exp.setY(exp.getY() + d * tmp.getY());
@@ -84,7 +80,6 @@ public class RobotPathDecoding_Test2 {
 			}
 		}
 		
-		exp.setResult(sb.toString());
 		return exp;
 	}
 }
