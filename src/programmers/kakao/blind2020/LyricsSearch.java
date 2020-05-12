@@ -7,7 +7,7 @@ public class LyricsSearch {
 
 	public static void main(String[] args) {
 		String words[] = { "frodo", "front", "frost", "frozen", "frame", "kakao" };
-		String queries[] = {"?????", "fro??", "????o", "fr???", "fro???" };
+		String queries[] = { "???f", "???ao", "fr???", "fro???", "pro?" };
 
 		int[] ans = solution(words, queries);
 		for (int i = 0; i < ans.length; i++)
@@ -17,22 +17,14 @@ public class LyricsSearch {
 	public static int[] solution(String[] words, String[] queries) {
 		int[] answer = new int[queries.length];
 
-//		Map<Integer, Trie[]> tries = new HashMap<>();
-
-//		for (int j = 1; j <= 10000; j++) {
-//			tries.put(j, new Trie[2]);
-//			tries.get(j)[0] = new Trie();
-//			tries.get(j)[1] = new Trie();
-//		}
-
 		Trie[] tries = new Trie[2];
 		tries[0] = new Trie();
 		tries[1] = new Trie();
+
 		for (int i = 0; i < words.length; i++) {
 			String w = words[i];
 			StringBuffer sb = new StringBuffer(w);
 
-			int length = w.length();
 			tries[0].insert(w);
 			tries[1].insert(sb.reverse().toString());
 		}
@@ -40,18 +32,13 @@ public class LyricsSearch {
 		for (int i = 0; i < queries.length; i++) {
 			String q = queries[i];
 			StringBuffer sb = new StringBuffer(q);
-			int length = q.length();
 
-//			Trie[] trieArray = tries.get(length);
-
-			if (q.charAt(0) == '?') {
+			if (q.charAt(0) == '?')
 				answer[i] = tries[1].count(sb.reverse().toString());
-			} else {
+			else
 				answer[i] = tries[0].count(q);
-			}
 
 		}
-
 		return answer;
 	}
 }
@@ -84,13 +71,11 @@ class Trie {
 		Node tmp = root;
 
 		int length = key.length();
-
 		for (int i = 0; i < key.length(); i++) {
 			char c = key.charAt(i);
 			Node child = tmp.getChildren().get(c);
-
 			if (c == '?')
-				return tmp.getLengthCount().get(length);
+				return tmp.getLengthCount().computeIfAbsent(length, p -> 0);
 
 			if (child == null)
 				return 0;
